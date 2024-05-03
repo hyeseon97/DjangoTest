@@ -34,6 +34,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'movies',
+    'user',
+    'rest_api',
 
     # Thrid party apps
     # 'django-extensions',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'djangopjt.urls'
@@ -82,9 +89,18 @@ WSGI_APPLICATION = 'djangopjt.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'hyeseon',  # 여기에 데이터베이스 이름을 지정합니다.
+        'HOST': '127.0.0.1',   # 여기에 MongoDB 호스트를 지정합니다.
+        'PORT': 27017,         # 여기에 MongoDB 포트를 지정합니다.
+        'USER': 'ssafy',      # 여기에 MongoDB 사용자 이름을 지정합니다.
+        'PASSWORD': '1234',  # 여기에 MongoDB 사용자 비밀번호를 지정합니다.
     }
 }
 
@@ -113,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
