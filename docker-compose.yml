@@ -1,0 +1,25 @@
+version: "3.8" # Docker Compose 파일 버전
+
+services:
+  backend:
+    build:
+      context: ./backend # 백엔드 Dockerfile 위치
+    ports:
+      - "8001:8001" # Django 애플리케이션의 포트 매핑
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Docker 소켓 마운트
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_DB_HOST: mongodb # MongoDB 호스트
+      MONGO_DB_PORT: 27017 # MongoDB 포트
+
+  mongodb:
+    image: mongo:latest # 사용할 MongoDB 이미지
+    ports:
+      - "27017:27017" # 호스트의 27017 포트와 컨테이너의 27017 포트 매핑
+    volumes:
+      - mongodb-data:/data/db # MongoDB 데이터 저장을 위한 볼륨
+
+volumes:
+  mongodb-data: # MongoDB 데이터를 저장할 볼륨 정의
