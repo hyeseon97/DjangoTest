@@ -33,8 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     # Local apps
-    'movies',
-    'user',
     'rest_api',
 
     # Thrid party apps
